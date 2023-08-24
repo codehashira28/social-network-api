@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { findOneAndUpdate } = require('../models/User');
 
 module.exports = {
   async getUsers(req, res) {
@@ -31,4 +32,23 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  async updateUser(req, res) {
+    try {
+      const result = await User.findOneAndUpdate({ _id: req.params.userId }, {username: req.body.username}, {new: true});
+      res.status(200).json(result);
+    } catch (err) {
+      console.log('error');
+      res.status(500).json({ message: 'something went wrong'});
+    }
+  },
+  async deleteUser(req, res) {
+    try {
+      const result = await User.findOneAndDelete({ _id: req.params.userId });
+      res.status(200).json(result);
+      console.log(`Deleted: ${result}`);
+    } catch (err) {
+      console.log('Uh Oh, something went wrong');
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+  }
 };
