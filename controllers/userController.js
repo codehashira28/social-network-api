@@ -11,7 +11,7 @@ module.exports = {
   },
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.postId });
+      const user = await User.findOne({ _id: req.params.userId }).populate('thoughts', 'friends');
 
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -25,8 +25,8 @@ module.exports = {
   // create a new post
   async createUser(req, res) {
     try {
-      const userData = await User.create(req.body);
-      res.json(userData);
+      const dbUserData = await User.create(req.body);
+      res.json(dbUserData);
     } catch (err) {
       res.status(500).json(err);
     }
