@@ -1,5 +1,4 @@
 const { User } = require('../models');
-const { findOneAndUpdate } = require('../models/User');
 
 module.exports = {
   async getUsers(req, res) {
