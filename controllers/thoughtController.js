@@ -28,7 +28,7 @@ module.exports = {
     try {
       const thought = await Thought.create(req.body);
       const user = await User.findOneAndUpdate(
-        { _id: req.body.userId },
+        { _id: req.body.userId, username: req.body.username },
         { $push: { thoughts: thought._id } },
         { new: true }
       );
@@ -36,7 +36,7 @@ module.exports = {
       if (!user) {
         return res
           .status(404)
-          .json({ message: 'thought created, but no users with this ID' });
+          .json({ message: 'thought created, but no users with this ID or userId and username do not match' });
       }
 
       res.json({ message: 'thought created' });
