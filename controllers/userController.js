@@ -54,7 +54,7 @@ module.exports = {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { friends: req.body } },
+        { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
       );
 
@@ -83,7 +83,7 @@ module.exports = {
           .json({ message: 'friend created, but no users with this ID' });
       }
 
-      res.json({ message: 'friend created' });
+      res.json({ message: 'friend removed' });
     } catch (err) {
       console.error(err);
     }
