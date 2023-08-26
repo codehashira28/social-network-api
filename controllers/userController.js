@@ -80,7 +80,7 @@ module.exports = {
       if (!user) {
         return res
           .status(404)
-          .json({ message: 'friend created, but no users with this ID' });
+          .json({ message: 'no user with this ID' });
       }
 
       res.json({ message: 'friend removed' });
