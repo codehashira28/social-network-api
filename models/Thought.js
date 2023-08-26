@@ -62,10 +62,7 @@ const thoughtSchema = new Schema(
 //formatDate function
 function formatDate(date) {
   const nowDate = new Date(date);
-  const month = nowDate.getMonth() + 1;
-  const day = nowDate.getDate();
-  const year = nowDate.getFullYear();
-  return `${month}/${day}/${year}`;
+  return `${nowDate.toLocaleString("en-US", {timeZone: "US/Central"})}`; //googled to find this snippet
 }
 
 // Create a virtual property `reactionCount` that gets the amount of reactions per user
